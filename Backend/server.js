@@ -2,7 +2,7 @@ const app = express();
 import express from "express";
 import cors from 'cors'
 import connectDB from "./config/db.js"
-import authRoute from './routes/authRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 import roomRoutes from './routes/roomRoutes.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
@@ -26,7 +26,6 @@ app.use("/api", authRoutes);
 
 app.use("/api", userRoutes);
 
-app.use("/api", authRoute);// Correct middleware path
 app.use("/api/room", roomRoutes);
 
 
