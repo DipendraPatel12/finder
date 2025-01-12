@@ -3,7 +3,8 @@ import city from "../assets/city.webp";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../context/AuthContext"; // Import the AuthContext
+import { useAuth } from "../context/AuthContext";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
       });

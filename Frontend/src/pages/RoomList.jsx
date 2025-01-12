@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 import RoomCard from "../components/RoomCard"; // Assuming RoomCard is in the components folder
-
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+console.log(apiUrl);
 const RoomList = () => {
   const [rooms, setRooms] = useState([]); // State to store rooms
   const [filter, setFilter] = useState("All"); // State to manage selected filter
   const [loading, setLoading] = useState(true); // State for loading indicator
 
-  const filters = ["All", "PG", "Hostel", "Room","Apartment", "Flat"];
+  const filters = ["All", "PG", "Hostel", "Room", "Apartment", "Flat"];
 
   const navigate = useNavigate(); // Hook to handle navigation
 
@@ -18,8 +19,8 @@ const RoomList = () => {
     // Fetch data from API
     const fetchRooms = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/room/all");
-      
+        const response = await axios.get(`${apiUrl}/api/room/all`);
+
         setRooms(response.data.rooms);
         setLoading(false);
       } catch (error) {

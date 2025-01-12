@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const RoomDetail = () => {
   const { id } = useParams();
   const [room, setRoom] = useState(null);
@@ -14,7 +14,7 @@ const RoomDetail = () => {
     const fetchRoomDetail = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/room/${id}`
+          `${apiUrl}/api/room/${id}`
         );
         setRoom(response.data.room);
         setLoading(false);

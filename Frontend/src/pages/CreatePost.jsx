@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast"; 
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -66,7 +67,7 @@ const CreatePost = () => {
       if (state?.post) {
         // Update post if it's an edit operation
         await axios.put(
-          `http://localhost:3000/api/room/update/${state.post._id}`,
+          `${apiUrl}/api/room/update/${state.post._id}`,
           formData,
           {
             headers: {
@@ -78,7 +79,7 @@ const CreatePost = () => {
         toast.success("Post updated successfully!");
       } else {
         // Create new post
-        await axios.post("http://localhost:3000/api/room/create", formData, {
+        await axios.post(`${apiUrl}/api/room/create`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",

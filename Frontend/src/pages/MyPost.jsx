@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const MyPost = () => {
   const [posts, setPosts] = useState([]);
   const { token } = useAuth();
@@ -27,7 +27,7 @@ const MyPost = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:3000/api/user/${userId}`,
+          `${apiUrl}/api/user/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

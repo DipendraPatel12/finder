@@ -3,6 +3,7 @@ import city from "../assets/city.webp";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -11,13 +12,13 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/register", {
+      const response = await axios.post(`${apiUrl}/api/register`, {
         username,
         email,
         password,
       });
-  
-      toast.success('User Registered successfully'); 
+
+      toast.success("User Registered successfully");
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error(`${error.response.data.message}`);
