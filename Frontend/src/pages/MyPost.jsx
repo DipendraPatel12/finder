@@ -15,6 +15,26 @@ const MyPost = () => {
     const userId = Cookies.get("userId");
     return userId || null;
   };
+  const handleDeleteClick = async (postId) => {
+    try {
+      const confirmation = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+      if (!confirmation) return;
+  
+      // Send DELETE request to backend to delete the post
+      await axios.delete(`${apiUrl}/api/remove/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      // Remove the post from the frontend
+      setPosts(posts.filter((post) => post._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -26,14 +46,11 @@ const MyPost = () => {
 
       try {
         setLoading(true);
-        const response = await axios.get(
-          `${apiUrl}/api/user/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${apiUrl}/api/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPosts(response.data.posts);
       } catch (error) {
         console.error("Error fetching user posts:", error);
@@ -66,10 +83,15 @@ const MyPost = () => {
                 title={post.title}
                 description={post.description}
                 rent={post.rent}
-                onDetailsClick={() => navigate(`/room/${post._id}`)
-                }
+                onDetailsClick={() => navigate(`/room/${post._id}`)}
               />
               {/* Edit button */}
+              <button
+                onClick={() => handleDeleteClick(post._id)}
+                className="absolute top-2 right-16 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-200"
+              >
+                Delete
+              </button>
               <button
                 onClick={() => handleEditClick(post)}
                 className="absolute top-2 right-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition duration-200"

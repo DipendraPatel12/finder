@@ -27,7 +27,7 @@ app.use("/api", authRoutes);
 
 app.use("/api", userRoutes);
 
-app.use("/api/room", roomRoutes);
+app.use("/api", roomRoutes);
 
 
 
