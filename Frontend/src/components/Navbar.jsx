@@ -1,25 +1,31 @@
 import { useState, useEffect } from "react";
 import { FaBars, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useAuth } from "./../context/AuthContext"; // Import the useAuth hook
+import { useAuth } from "./../context/AuthContext";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Navbar toggle
+  const [isOpen, setIsOpen] = useState(false); // Navbar toggle for mobile menu
   const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle
-  const { isAuthenticated, logout } = useAuth(); // Use the authentication state
+  const { isAuthenticated, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    setSidebarOpen(false); // Close sidebar when opening mobile menu
   };
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+    setSidebarOpen(!sidebarOpen);
+    setIsOpen(false); // Close mobile menu when opening sidebar
   };
 
-  // Debugging the authentication state
+  // Prevent scrolling when mobile menu or sidebar is open
   useEffect(() => {
-    console.log("isAuthenticated: ", isAuthenticated); // Check if the user is authenticated
-  }, [isAuthenticated]);
+    if (isOpen || sidebarOpen) {
+      document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+      document.body.style.overflow = "auto"; // Enable scrolling
+    }
+  }, [isOpen, sidebarOpen]);
 
   return (
     <nav className="bg-black text-white p-1">
@@ -37,7 +43,7 @@ const Navbar = () => {
 
         {/* Navbar Links */}
         <ul
-          className={`md:flex md:space-x-6 md:static md:w-auto z-20 fixed top-0 right-0 h-100 w-2/4 bg-black p-8 flex-col items-center transition-transform duration-300 ${
+          className={`md:flex md:space-x-6 md:static md:w-auto z-20 fixed top-0 right-0 h-full w-2/4 bg-black p-8 flex-col items-center transition-transform duration-300 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           } md:translate-x-0 md:flex-row md:p-0`}
         >
@@ -45,6 +51,7 @@ const Navbar = () => {
             <Link
               to="/rooms"
               className="bg-white text-black hover:bg-orange-300 py-2 px-3 rounded-md"
+              onClick={toggleMenu} // Automatically hides menu when clicked
             >
               Rooms
             </Link>
@@ -60,6 +67,7 @@ const Navbar = () => {
               <Link
                 to="/login"
                 className="bg-white text-black hover:bg-orange-300 py-2 px-3 rounded-md"
+                onClick={toggleMenu} // Automatically hides menu when clicked
               >
                 Login
               </Link>
