@@ -86,18 +86,22 @@ const MyPost = () => {
                 onDetailsClick={() => navigate(`/room/${post._id}`)}
               />
               {/* Edit button */}
+              <div className="flex space-x-2 absolute top-2 right-2">
+
               <button
-                onClick={() => handleDeleteClick(post._id)}
-                className="absolute top-2 right-16 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-200"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => handleEditClick(post)}
-                className="absolute top-2 right-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition duration-200"
-              >
-                Edit
-              </button>
+  onClick={() => handleDeleteClick(post._id)}
+  className="absolute top-2 right-20 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-200"
+>
+  Delete
+</button>
+<button
+  onClick={() => handleEditClick(post)}
+  className="absolute top-2 right-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition duration-200"
+>
+  Edit
+</button>
+
+              </div>
             </div>
           ))}
         </div>
