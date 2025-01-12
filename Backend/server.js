@@ -1,6 +1,12 @@
 const app = express();
 import express from "express";
 import cors from 'cors'
+import connectDB from "./config/db.js"
+import authRoute from './routes/authRoutes.js'
+import roomRoutes from './routes/roomRoutes.js';
+import cookieParser from 'cookie-parser';
+import userRoutes from './routes/userRoutes.js';
+import dotenv from "dotenv";
 const corsOptions = {
   origin: ["http://localhost:5173"],
   credentials: true // Allow cookies to be sent with requests
@@ -8,23 +14,15 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
-import dotenv from "dotenv";
 dotenv.config(); // Load environment variables
-import cookieParser from 'cookie-parser';
 
 app.use(cookieParser());
-import connectDB from "./config/db.js"
-import authRoute from './routes/authRoutes.js';
-import roomRoutes from './routes/roomRoutes.js';
 const Port = process.env.PORT || 8000;
-import path from "path"
-connectDB();
 
-import authRoutes from './routes/authRoutes.js';
+connectDB();
 app.use("/api", authRoutes);
 
 
-import userRoutes from './routes/userRoutes.js';
 
 app.use("/api", userRoutes);
 
