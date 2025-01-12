@@ -38,8 +38,6 @@ const RoomList = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Available Rooms</h2>
-
       {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">
         {filters.map((type) => (

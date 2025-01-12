@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; 
+
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreatePost = () => {
@@ -64,27 +65,29 @@ const CreatePost = () => {
     images.forEach((image) => formData.append("images", image));
 
     try {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      };
+
+      const config = {
+        headers,
+        withCredentials: true, // Ensure cookies are sent
+      };
+
+      console.log("Request Headers:", headers);  // Log headers to ensure cookies are sent
+
       if (state?.post) {
         // Update post if it's an edit operation
         await axios.put(
           `${apiUrl}/api/room/update/${state.post._id}`,
           formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
+          config
         );
         toast.success("Post updated successfully!");
       } else {
         // Create new post
-        await axios.post(`${apiUrl}/api/room/create`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(`${apiUrl}/api/room/create`, formData, config);
         toast.success("Post created successfully!");
       }
       navigate("/my-post");
