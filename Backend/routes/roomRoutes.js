@@ -10,9 +10,9 @@ const router = express.Router();
 
 // Route to create a room with image upload
 router.post('/room/create',authenticateToken, upload.array('images', 5), createRoom);
-router.put('/update/:id', upload.array('images', 5), updateRoom);
+router.put('/room/update/:id', upload.array('images', 5), updateRoom);
 router.delete('/remove/:roomId', deleteRoom); // Delete route
 router.get('/user/:userId',authenticateToken, getUserPosts);
 router.get('/room/all', getAllRooms);
-router.get('/:id', getRoomById);
+router.get('/room/:id', getRoomById);
 export default router;
