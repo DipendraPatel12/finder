@@ -23,6 +23,7 @@ const LoginPage = () => {
         },
         { withCredentials: true }
       );
+      
       const { token, id } = response.data;
 
       // Call the login method from AuthContext

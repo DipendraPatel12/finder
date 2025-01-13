@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import axios from "axios"; // Import axios for API requests
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+
 // Create the context
 const AuthContext = createContext();
 
@@ -10,24 +11,28 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null); // Add token state
 
   // Function to verify token on initial load
   const verifyToken = async () => {
-    const token = Cookies.get("authToken");
-    const user = Cookies.get("userId");
-    console.log("Token from cookies:", token);
-    console.log("User from cookies:", user);
-    if (token && user) {
+    const storedToken = Cookies.get("authToken");
+    const storedUserId = Cookies.get("userId");
+
+    console.log("Token from cookies:", storedToken);
+    console.log("User from cookies:", storedUserId);
+
+    if (storedToken && storedUserId) {
       try {
         // Send a request to verify the token
         const response = await axios.get(`${apiUrl}/api/verify-token`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${storedToken}` },
           withCredentials: true, // Include credentials in the request
         });
 
         if (response.status === 200) {
           setIsAuthenticated(true);
-          setUserId(user);
+          setUserId(storedUserId);
+          setToken(storedToken); // Set token state
         }
       } catch (error) {
         console.error("Token verification failed:", error);
@@ -36,26 +41,25 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("userId");
         setIsAuthenticated(false);
         setUserId(null);
+        setToken(null); // Clear token state
       }
     }
   };
 
+  // Call the verifyToken function when the component mounts
   useEffect(() => {
-    verifyToken(); // Call the token verification function on initial load
+    verifyToken();
   }, []);
 
   // Login function
   const login = (token, id) => {
     console.log("Login - Token:", token);
-    Cookies.set("authToken", token, { expires: 7, path: "/" , secure: true,});
+    Cookies.set("authToken", token, { expires: 7, path: "/", secure: true });
     Cookies.set("userId", id, { expires: 7, path: "/" });
-    console.log(
-      "Cookies set:",
-      Cookies.get("authToken"),
-      Cookies.get("userId")
-    );
+
     setIsAuthenticated(true);
     setUserId(id);
+    setToken(token); // Set token state
   };
 
   // Logout function
@@ -64,6 +68,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("userId");
     setIsAuthenticated(false);
     setUserId(null);
+    setToken(null); // Clear token state
     window.location.reload();
   };
 
@@ -72,6 +77,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         userId,
+        token, // Provide token in context
         login,
         logout,
       }}

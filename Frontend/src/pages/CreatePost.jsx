@@ -7,6 +7,9 @@ import { toast } from "react-hot-toast";
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreatePost = () => {
+  const { userId, token } = useAuth();
+  console.log("Token from Context:", token);
+  console.log("UserId from Context:", userId);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
@@ -15,10 +18,10 @@ const CreatePost = () => {
   const [contact, setContact] = useState("");
   const [ownername, setOwnername] = useState("");
   const [images, setImages] = useState([]);
-  const { userId, token } = useAuth();
   const { state } = useLocation(); // Receiving post details via state
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     if (state?.post) {
       const post = state.post;
@@ -65,7 +68,11 @@ const CreatePost = () => {
     images.forEach((image) => formData.append("images", image));
 
     try {
-      console.log("JWT Token:", token);
+      console.log("JWT Token:", token); // Log token to ensure it's available
+      if (!token) {
+        return toast.error("Authentication token is missing.");
+      }
+
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -75,7 +82,6 @@ const CreatePost = () => {
         headers,
         withCredentials: true, // Ensure cookies are sent
       };
-      console.log("token", token);
       console.log("Request Headers:", headers); // Log headers to ensure cookies are sent
 
       if (state?.post) {
