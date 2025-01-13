@@ -8,7 +8,9 @@ import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 import dotenv from "dotenv";
 const corsOptions = {
-  origin: ["https://finder-pi-lilac.vercel.app"],
+  origin: ["https://finder-pi-lilac.vercel.app",
+    "http://localhost:5174"
+  ],
   credentials: true // Allow cookies to be sent with requests
 };
 app.use(cors(corsOptions));
