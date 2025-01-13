@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 import axios from "axios"; // Import axios for API requests
+import { useNavigate } from "react-router-dom";
+
+
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -9,6 +12,7 @@ const AuthContext = createContext();
 
 // AuthProvider component that wraps the application
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate(); 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null); // Add token state
@@ -69,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUserId(null);
     setToken(null); // Clear token state
+    navigate("/");
     window.location.reload();
   };
 

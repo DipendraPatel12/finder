@@ -97,7 +97,7 @@ const CreatePost = () => {
         await axios.post(`${apiUrl}/api/room/create`, formData, config);
         toast.success("Post created successfully!");
       }
-      navigate("/my-post");
+      navigate("/rooms");
     } catch (error) {
       console.error("Error saving post:", error);
       toast.error("Failed to save post. Please try again.");

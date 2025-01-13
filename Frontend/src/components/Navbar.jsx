@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaBars, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Navbar toggle for mobile menu
@@ -108,7 +109,8 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   logout();
-                  toggleSidebar(); // Automatically hides sidebar after logout
+                  toggleSidebar();
+                   // Automatically hides sidebar after logout
                 }}
                 className="block bg-white text-black hover:bg-orange-300 py-1 px-4 rounded-md"
               >
