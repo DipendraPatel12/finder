@@ -7,7 +7,7 @@ export const register = async (req, res) => {
         const { username, email, password } = req.body;
 
         // Validate required fields
-        if (!username || !email || !password ) {
+        if (!username || !email || !password) {
             return res.status(400).json({ message: 'Please fill all the fields' });
         }
 
@@ -64,8 +64,16 @@ export const login = async (req, res) => {
         // Generate a JWT token (expires in 1 hour)
         const token = jwt.sign({ user: userData }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        // Send the token and other user info in the response
-        return res.status(200).json({ message: 'Login successful', token, id: user.id });
+        // Set the token in a cookie (HTTP-only, expires in 7 days)
+        res.cookie('authToken', token, {
+            httpOnly: true,   // Prevents JavaScript access to the cookie
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+            secure: process.env.NODE_ENV === 'production', // Send cookie only over HTTPS in production
+            sameSite: 'Strict', // Helps prevent CSRF attacks
+        });
+
+        // Send success response with user info
+        return res.status(200).json({ message: 'Login successful', id: user.id });
     } catch (error) {
         return res.status(500).json({ error: `An error occurred: ${error.message}` });
     }
