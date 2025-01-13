@@ -34,9 +34,7 @@ export const register = async (req, res) => {
     }
 };
 
-export const raja = async(req,res)=>{
-    res.json({message:"u are done"});
-}
+
 
 
 export const login = async (req, res) => {

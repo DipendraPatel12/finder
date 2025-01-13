@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 import axios from "axios"; // Import axios for API requests
 
-
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 // Create the context
 const AuthContext = createContext();
 
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     if (token && user) {
       try {
         // Send a request to verify the token
-        const response = await axios.get("http://localhost:3000/api/verify-token", {
+        const response = await axios.get(`${apiUrl}/api/verify-token`, {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true, // Include credentials in the request
         });
