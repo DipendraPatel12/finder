@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast"; 
+import { toast } from "react-hot-toast";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -65,6 +65,7 @@ const CreatePost = () => {
     images.forEach((image) => formData.append("images", image));
 
     try {
+      console.log("JWT Token:", token);
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -74,8 +75,8 @@ const CreatePost = () => {
         headers,
         withCredentials: true, // Ensure cookies are sent
       };
-
-      console.log("Request Headers:", headers);  // Log headers to ensure cookies are sent
+      console.log("token", token);
+      console.log("Request Headers:", headers); // Log headers to ensure cookies are sent
 
       if (state?.post) {
         // Update post if it's an edit operation

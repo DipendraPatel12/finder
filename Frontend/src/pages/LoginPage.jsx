@@ -1,6 +1,6 @@
 import { useState } from "react";
 import city from "../assets/city.webp";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
@@ -15,14 +15,19 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${apiUrl}/api/login`, {
-        email,
-        password,
-      },{ withCredentials: true });
+      const response = await axios.post(
+        `${apiUrl}/api/login`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
       const { token, id } = response.data;
 
       // Call the login method from AuthContext
       login(token, id);
+      console.log("Login Response:", response.data);
 
       toast.success("Login successful!");
       navigate("/");

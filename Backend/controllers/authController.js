@@ -72,8 +72,8 @@ export const login = async (req, res) => {
             sameSite: 'Strict', // Helps prevent CSRF attacks
         });
 
-        // Send success response with user info
-        return res.status(200).json({ message: 'Login successful', id: user.id });
+        // Send success response with user info and token
+        return res.status(200).json({ message: 'Login successful', token, id: user.id });
     } catch (error) {
         return res.status(500).json({ error: `An error occurred: ${error.message}` });
     }

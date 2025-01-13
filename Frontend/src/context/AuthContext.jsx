@@ -15,7 +15,8 @@ export const AuthProvider = ({ children }) => {
   const verifyToken = async () => {
     const token = Cookies.get("authToken");
     const user = Cookies.get("userId");
-
+    console.log("Token from cookies:", token);
+    console.log("User from cookies:", user);
     if (token && user) {
       try {
         // Send a request to verify the token
@@ -45,8 +46,14 @@ export const AuthProvider = ({ children }) => {
 
   // Login function
   const login = (token, id) => {
-    Cookies.set("authToken", token, { expires: 7, path: "/" });
+    console.log("Login - Token:", token);
+    Cookies.set("authToken", token, { expires: 7, path: "/" , secure: true,});
     Cookies.set("userId", id, { expires: 7, path: "/" });
+    console.log(
+      "Cookies set:",
+      Cookies.get("authToken"),
+      Cookies.get("userId")
+    );
     setIsAuthenticated(true);
     setUserId(id);
   };
