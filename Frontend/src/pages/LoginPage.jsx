@@ -18,7 +18,7 @@ const LoginPage = () => {
       const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
-      });
+      },{ withCredentials: true });
       const { token, id } = response.data;
 
       // Call the login method from AuthContext
