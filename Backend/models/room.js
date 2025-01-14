@@ -11,13 +11,13 @@ const roomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    title:{
-      type:String,
-      required:true
+    title: {
+      type: String,
+      required: true
     },
-    description:{
-      type:String,
-      required:true
+    description: {
+      type: String,
+      required: true
     },
     location: {
       type: String,
@@ -27,13 +27,15 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    type:{
-      type:String,
-      required:true
+    type: {
+      type: String,
+      required: true
     },
     contact: {
       type: Number,
       required: true,
+      minlength: 10,
+      maxlength: 10
     },
     images: [
       {
