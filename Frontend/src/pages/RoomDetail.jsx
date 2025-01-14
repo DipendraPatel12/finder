@@ -51,12 +51,13 @@ const RoomDetail = () => {
         >
           &#8592; Back to Rooms
         </button>
-        <button
+        {/* <button
           onClick={handleBook}
           className="px-6 py-2 bg-orange-300 text-white rounded-lg hover:bg-orange-400 transition duration-300"
+          
         >
           Book Room
-        </button>
+        </button> */}
       </div>
 
       {/* Room Title */}
