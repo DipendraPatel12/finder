@@ -128,6 +128,7 @@ const CreatePost = () => {
               onChange={(e) => setOwnername(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter owner's name"
+              required
             />
           </div>
 
@@ -186,6 +187,7 @@ const CreatePost = () => {
               onChange={(e) => setLocation(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter room location"
+              required
             />
           </div>
 
