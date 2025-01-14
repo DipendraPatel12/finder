@@ -47,13 +47,13 @@ const RoomDetail = () => {
       <div className="flex justify-between items-center mb-8">
         <button
           onClick={handleBack}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+          className="px-6 py-2 bg-orange-300 text-white rounded-lg hover:bg-orange-300 transition duration-300"
         >
           &#8592; Back to Rooms
         </button>
         <button
           onClick={handleBook}
-          className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
+          className="px-6 py-2 bg-orange-300 text-white rounded-lg hover:bg-orange-400 transition duration-300"
         >
           Book Room
         </button>
@@ -67,7 +67,7 @@ const RoomDetail = () => {
         <img
           src={room.images[currentImageIndex].url}
           alt={room.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
         {/* Navigation Buttons */}
         <button
@@ -103,7 +103,7 @@ const RoomDetail = () => {
             <p className="text-lg text-gray-700">{room.description}</p>
             <p className="text-sm text-gray-600">📍 Location: {room.location}</p>
             <p className="text-sm text-gray-600">
-              🗓 Available from: {room.availableFrom}
+              🗓 Status: Available
             </p>
           </div>
 
