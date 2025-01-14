@@ -42,6 +42,10 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (contact.length !== 10) {
+      toast.error("Contact number must be exactly 10 digits long.");
+      return;
+    }
 
     if (
       !title ||
