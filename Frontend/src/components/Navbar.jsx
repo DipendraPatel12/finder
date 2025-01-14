@@ -60,7 +60,7 @@ const Navbar = () => {
 
           {/* Show User Icon if Logged In */}
           {isAuthenticated ? (
-            <li className="p-2 text-center flex items-center cursor-pointer hover:bg-orange-300 rounded-lg">
+            <li className="p-2 text-center flex justify-center items-center cursor-pointer hover:bg-orange-300 rounded-lg">
               <FaUser size={24} onClick={toggleSidebar} />
             </li>
           ) : (
@@ -110,7 +110,7 @@ const Navbar = () => {
                 onClick={() => {
                   logout();
                   toggleSidebar();
-                   // Automatically hides sidebar after logout
+                  // Automatically hides sidebar after logout
                 }}
                 className="block bg-white text-black hover:bg-orange-300 py-1 px-4 rounded-md"
               >

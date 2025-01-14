@@ -4,12 +4,12 @@ import streamifier from 'streamifier';
 
 export const createRoom = async (req, res) => {
   try {
-    const { ownername,title,description, location, rent,type, contact } = req.body;
+    const { ownername, title, description, location, rent, type, contact } = req.body;
     const postBy = req.user.user._id;
     console.log(req.user.user._id);
 
     // Check if required fields are provided
-    if (!ownername ||!title||!description|| !location || !rent || !contact) {
+    if (!ownername || !title || !description || !location || !rent || !contact) {
       return res.status(400).json({ message: "Please fill all the fields" });
     }
 
@@ -59,7 +59,7 @@ export const createRoom = async (req, res) => {
 export const updateRoom = async (req, res) => {
   try {
     const { id } = req.params; // Get room ID from request parameters
-    const { ownername, location, rent, contact } = req.body;
+    const { ownername, location, rent, contact, title, description } = req.body;
 
     // Find the existing room by ID
     const existingRoom = await Room.findById(id);
@@ -95,11 +95,13 @@ export const updateRoom = async (req, res) => {
       existingRoom.images = imageUploads;
     }
 
-    // Update other fields
+    // Update fields, including title and description
     existingRoom.ownername = ownername || existingRoom.ownername;
     existingRoom.location = location || existingRoom.location;
     existingRoom.rent = rent || existingRoom.rent;
     existingRoom.contact = contact || existingRoom.contact;
+    existingRoom.title = title || existingRoom.title;
+    existingRoom.description = description || existingRoom.description;
     existingRoom.updatedAt = Date.now();
 
     // Save the updated room to the database
@@ -107,10 +109,10 @@ export const updateRoom = async (req, res) => {
 
     return res.status(200).json({ message: "Room updated successfully", room: existingRoom });
   } catch (error) {
+    console.error('Error updating room:', error);
     return res.status(500).json({ error: `Server error: ${error.message}` });
   }
 };
-
 
 export const deleteRoom = async (req, res) => {
   try {
@@ -145,7 +147,7 @@ export const getUserPosts = async (req, res) => {
   try {
     // Find rooms where postBy matches the user ID
     const posts = await Room.find({ postBy: userId }).populate('postBy', 'username email');
-    
+
     if (!posts.length) {
       return res.status(404).json({ message: 'No posts found for this user.' });
     }

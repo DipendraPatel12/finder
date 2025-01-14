@@ -73,6 +73,7 @@ const SignupPage = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                minLength={6}
                 required
                 className="mt-1 w-full rounded border border-gray-300 px-4 py-2 text-gray-800 focus:outline-none focus:ring-1 focus:ring-orange-300"
                 placeholder="Enter your email"
@@ -91,6 +92,7 @@ const SignupPage = () => {
                 type="password"
                 id="password"
                 value={password}
+                minLength={6}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="mt-1 w-full rounded border border-gray-300 px-4 py-2 text-gray-800 focus:outline-none focus:ring-1 focus:ring-orange-300"
