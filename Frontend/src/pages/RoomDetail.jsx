@@ -77,11 +77,13 @@ const RoomDetail = () => {
 
         {/* Image Slider */}
         <div className="relative w-full h-64 mb-6">
-          <img
-            src={room.images[currentImageIndex].url}
-            alt={room.title}
-            className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
-          />
+          <div className="relative w-full h-full overflow-hidden rounded-lg">
+            <img
+              src={room.images[currentImageIndex].url}
+              alt={room.title}
+              className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
+            />
+          </div>
           {/* Previous Button */}
           <button
             onClick={handlePrevImage}
