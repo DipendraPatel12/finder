@@ -13,9 +13,7 @@ const RoomDetail = () => {
   useEffect(() => {
     const fetchRoomDetail = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/room/${id}`
-        );
+        const response = await axios.get(`${apiUrl}/api/room/${id}`);
         setRoom(response.data.room);
         setLoading(false);
       } catch (error) {
@@ -82,7 +80,7 @@ const RoomDetail = () => {
           <img
             src={room.images[currentImageIndex].url}
             alt={room.title}
-            className="w-full h-full object-scale-down rounded-lg"
+            className="w-full h-full object-cover rounded-lg"
           />
           {/* Previous Button */}
           <button
