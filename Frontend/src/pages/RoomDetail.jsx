@@ -80,7 +80,7 @@ const RoomDetail = () => {
           <img
             src={room.images[currentImageIndex].url}
             alt={room.title}
-            className="w-full h-full object-fill rounded-lg"
+            className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
           />
           {/* Previous Button */}
           <button
