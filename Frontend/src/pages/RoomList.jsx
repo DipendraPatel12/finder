@@ -11,7 +11,7 @@ const RoomList = () => {
   const [filter, setFilter] = useState("All"); // State to manage selected filter
   const [loading, setLoading] = useState(true); // State for loading indicator
 
-  const filters = ["All", "PG", "Hostel", "Room", "Apartment", "Flat"];
+  const filters = ["All", "PG", "House", "Room",];
 
   const navigate = useNavigate(); // Hook to handle navigation
 

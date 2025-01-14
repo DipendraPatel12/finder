@@ -59,7 +59,7 @@ export const createRoom = async (req, res) => {
 export const updateRoom = async (req, res) => {
   try {
     const { id } = req.params; // Get room ID from request parameters
-    const { ownername, location, rent, contact, title, description } = req.body;
+    const { ownername, location, rent, type, contact, title, description } = req.body;
 
     // Find the existing room by ID
     const existingRoom = await Room.findById(id);
@@ -101,6 +101,7 @@ export const updateRoom = async (req, res) => {
     existingRoom.rent = rent || existingRoom.rent;
     existingRoom.contact = contact || existingRoom.contact;
     existingRoom.title = title || existingRoom.title;
+    existingRoom.type = type || existingRoom.type;
     existingRoom.description = description || existingRoom.description;
     existingRoom.updatedAt = Date.now();
 

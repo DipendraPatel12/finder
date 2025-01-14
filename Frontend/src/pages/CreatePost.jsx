@@ -21,7 +21,6 @@ const CreatePost = () => {
   const { state } = useLocation(); // Receiving post details via state
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     if (state?.post) {
       const post = state.post;
@@ -164,9 +163,8 @@ const CreatePost = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="Room">Room</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Flat">Flat</option>
-              <option value="Hostel">Hostel</option>
+
+              <option value="House">Hostel</option>
               <option value="PG">PG</option>
             </select>
           </div>
