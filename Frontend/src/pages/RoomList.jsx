@@ -11,7 +11,7 @@ const RoomList = () => {
   const [filter, setFilter] = useState("All"); // State to manage selected filter
   const [loading, setLoading] = useState(true); // State for loading indicator
 
-  const filters = ["All", "PG", "House", "Room",];
+  const filters = ["All", "PG", "House", "Room"];
 
   const navigate = useNavigate(); // Hook to handle navigation
 
@@ -37,7 +37,7 @@ const RoomList = () => {
     filter === "All" ? rooms : rooms.filter((room) => room.type === filter);
 
   return (
-    <div className="p-6">
+    <div className="min-h-screen overflow-auto p-6">
       {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">
         {filters.map((type) => (
@@ -45,12 +45,12 @@ const RoomList = () => {
             key={type}
             onClick={() => setFilter(type)}
             className={`px-4 py-2 rounded-md text-sm font-medium border 
-              ${
-                filter === type
-                  ? "bg-orange-300 text-black"
-                  : "bg-gray-100 text-gray-700"
-              } 
-               hover:bg-orange-300 hover:text-white transition-all duration-300 transform hover:scale-105`}
+                ${
+                  filter === type
+                    ? "bg-orange-300 text-black"
+                    : "bg-gray-100 text-gray-700"
+                } 
+                 hover:bg-orange-300 hover:text-white transition-all duration-300 transform hover:scale-105`}
           >
             {type}
           </button>
