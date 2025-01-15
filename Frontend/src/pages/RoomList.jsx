@@ -36,51 +36,54 @@ const RoomList = () => {
   const filteredRooms =
     filter === "All" ? rooms : rooms.filter((room) => room.type === filter);
 
-  return (
-    <div className="min-h-screen overflow-auto p-6">
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-6">
-        {filters.map((type) => (
-          <button
-            key={type}
-            onClick={() => setFilter(type)}
-            className={`px-4 py-2 rounded-md text-sm font-medium border 
-                ${
-                  filter === type
-                    ? "bg-orange-300 text-black"
-                    : "bg-gray-100 text-gray-700"
-                } 
-                 hover:bg-orange-300 hover:text-white transition-all duration-300 transform hover:scale-105`}
-          >
-            {type}
-          </button>
-        ))}
-      </div>
-
-      {/* Room Cards Grid */}
-      {loading ? (
-        <p className="text-center text-gray-600">Loading rooms...</p>
-      ) : filteredRooms.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredRooms.map((room) => (
-            <RoomCard
-              key={room._id} // Use _id as the unique key
-              image={room.images[0]} // Assuming room.image is a valid URL
-              title={room.title}
-              description={room.description}
-              rent={room.rent}
-              onDetailsClick={() => navigate(`/room/${room._id}`)} // Corrected navigation path
-              className="transition-all duration-500 transform hover:scale-105 hover:shadow-xl" // Hover effect for room card
-            />
-          ))}
+    return (
+      <div style={{ height: '100vh', overflowY: 'auto' }}>
+        <div className="p-6">
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
+            {filters.map((type) => (
+              <button
+                key={type}
+                onClick={() => setFilter(type)}
+                className={`px-4 py-2 rounded-md text-sm font-medium border 
+                  ${
+                    filter === type
+                      ? "bg-orange-300 text-black"
+                      : "bg-gray-100 text-gray-700"
+                  } 
+                   hover:bg-orange-300 hover:text-white transition-all duration-300 transform hover:scale-105`}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+    
+          {/* Room Cards Grid */}
+          {loading ? (
+            <p className="text-center text-gray-600">Loading rooms...</p>
+          ) : filteredRooms.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredRooms.map((room) => (
+                <RoomCard
+                  key={room._id}
+                  image={room.images[0]}
+                  title={room.title}
+                  description={room.description}
+                  rent={room.rent}
+                  onDetailsClick={() => navigate(`/room/${room._id}`)}
+                  className="transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-600">
+              No rooms available for the selected filter.
+            </p>
+          )}
         </div>
-      ) : (
-        <p className="text-center text-gray-600">
-          No rooms available for the selected filter.
-        </p>
-      )}
-    </div>
-  );
+      </div>
+    );
+    
 };
 
 export default RoomList;
