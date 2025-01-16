@@ -28,7 +28,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="relative h-[650px] w-full">
+    <div className="relative h-[580px] w-full">
       {/* Background Image */}
       <img
         src={city}
