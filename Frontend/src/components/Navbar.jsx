@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaBars, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../context/AuthContext";
-import { Navigate } from "react-router-dom";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Navbar toggle for mobile menu

@@ -11,7 +11,7 @@ const HeroSection = () => {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <motion.div
-        initial={{ y: -300, opacity: 0 }}
+        initial={{ y: -200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white space-y-4"

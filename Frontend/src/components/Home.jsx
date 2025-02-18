@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
 import homeImage from "../assets/ForRent.png";
 import { motion } from "framer-motion";
 
 const Home = () => {
-  const [animate, setAnimate] = useState(false); // For text animation
-
-  useEffect(() => {
-    // Trigger the animation after the component mounts
-    setAnimate(true);
-  }, []);
-
   return (
     <div className="h-[300px] relative overflow-hidden bg-gray-100">
       {/* Background image with blur effect */}
