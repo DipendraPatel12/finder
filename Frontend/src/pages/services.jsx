@@ -1,32 +1,38 @@
-
-import roomimg from '../assets/hotel-room.jpg'
-import pexel from '../assets/pexels-photo.jpeg'
-import pg from '../assets/PG.webp'
+import roomimg from "../assets/hotel-room.jpg";
+import pexel from "../assets/pexels-photo.jpeg";
+import pg from "../assets/PG.webp";
+import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
     {
       id: 1,
       title: "Room on Rent",
-      image: roomimg, // Replace with your image path
+      image: roomimg,
     },
     {
       id: 2,
       title: "House on Rent",
-      image: pexel, // Replace with your image path
+      image: pexel,
     },
     {
       id: 3,
       title: "Pg on rent",
-      image: pg, // Replace with your image path
+      image: pg,
     },
   ];
 
   return (
     <div className="px-6 py-12 bg-gray-400">
-      <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in-down">
+      <motion.h2
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: false, amount: 0.2 }}
+        className="text-3xl font-bold text-center mb-12"
+      >
         Our Services
-      </h2>
+      </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service) => (
           <div

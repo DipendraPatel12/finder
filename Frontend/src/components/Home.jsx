@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import homeImage from '../assets/ForRent.png';
+import homeImage from "../assets/ForRent.png";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [animate, setAnimate] = useState(false); // For text animation
@@ -25,28 +26,32 @@ const Home = () => {
         {/* Texts container */}
         <div className="text-center space-y-4">
           {/* First text comes from left */}
-          <div
-            className={`transform ${
-              animate ? "translate-x-0" : "-translate-x-full"
-            } transition-transform duration-1000 ease-out`}
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }} // ✅ Animates when in view
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
               Thank You For Visting
             </h1>
-          </div>
+          </motion.div>
 
           {/* Second text comes from right, placed below the first text */}
-          <div
-            className={`transform ${
-              animate ? "translate-x-0" : "translate-x-full"
-            } transition-transform duration-1000 ease-out`}
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }} // ✅ Animates when in view
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
           >
             <p className="text-lg md:text-xl text-white">
-               Your Ideal Room is Just a Click Away
+              Your Ideal Room is Just a Click Away
             </p>
-          </div>
+          </motion.div>
           <div>
-            <button className="bg-white text-black p-2 rounded-md">Explore Now</button>
+            <button className="bg-white text-black p-2 rounded-md">
+              Explore Now
+            </button>
           </div>
         </div>
       </div>
