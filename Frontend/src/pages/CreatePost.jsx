@@ -29,7 +29,7 @@ const CreatePost = () => {
       setLocation(post.location);
       setRent(post.rent);
       setType(post.type);
-      setContact(post.contact);
+      setContact(String(post.contact));
       setOwnername(post.ownername);
       // If the post has images, set them (assuming images are URL links)
       setImages(post.images);
@@ -42,7 +42,7 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (contact.length !== 10) {
+    if (String(contact).length !== 10) {
       toast.error("Contact number must be exactly 10 digits long.");
       return;
     }
